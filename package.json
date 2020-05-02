@@ -1,5 +1,4 @@
 {
-  "homepage": "http://firedreamgames.github.io/hivearena",
   "name": "hivearena",
   "version": "0.1.0",
   "private": true,
@@ -14,8 +13,6 @@
     "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
