@@ -111,54 +111,60 @@ class App extends Component {
       
     return (
       <div className="App">
+        <div id="MainDiv">
+          <h1>HIVE ARENA</h1>
         
-        {!exists&&<Modal id="loginmodal" size="mini" open={true}>
-          <Modal.Header>Login with Hive Keychain</Modal.Header>
-          <Modal.Content>
-            <Modal.Description>                              
-              <p>You need Hive KeyChain installed to play.{<br />}
-              </p>
-              <div class="ui labeled input">
-                <div class="ui label label">@{this.state.username}</div>
-                <input type="text" placeholder="username" onChange={this.handleNameChange} />
-              </div>
-              <Button id="modalBut" onClick={this.checkKeyChain}>Login with Hive KeyChain</Button>     
-            </Modal.Description>
-          </Modal.Content>
-        </Modal>}
-          
-        {exists&&!charselected&&<Modal id="charselect" size="large" open={true}>
-          <Button id="roguebutton" onClick={this.handleRogueSelect}>Select Rogue</Button>
-          <Button id="warriorbutton" onClick={this.handleWarriorSelect}>Select Warrior</Button>
-          <Button id="priestbutton" onClick={this.handlePriestSelect}>Select Priest</Button>   
-        </Modal>}  
+          {!exists&&<Modal id="loginmodal" size="mini" open={true}>
+            <Modal.Header></Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <div class="ui labeled input">
+                    <div class="uilabel">@{this.state.username}</div>
+                    <input id="nameinput" type="text" placeholder="username" onChange={this.handleNameChange} />
+                </div>
+                <Button id="modalBut" onClick={this.checkKeyChain}>LOGIN</Button>                                 
+                <p id="logintext">You need Hive KeyChain installed to play.{<br />}
+                </p>
+                  
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>}
+            
+          {exists&&!charselected&&<Modal id="charselect" size="large" open={true}>
+            <Button id="roguebutton" onClick={this.handleRogueSelect}>Select Rogue
+            
+            </Button>
+            <Button id="warriorbutton" onClick={this.handleWarriorSelect}>Select Warrior</Button>
+            <Button id="priestbutton" onClick={this.handlePriestSelect}>Select Priest</Button>   
+          </Modal>}  
 
-        {(charselected)&&<Modal id="online" size="mini" open={true}>
-          <p>Users Online{<br />}</p>
-          <p>{username}-{char}{<br />}</p>
-        </Modal>}    
+          {(charselected)&&<Modal id="online" size="mini" open={true}>
+            <p>Users Online{<br />}</p>
+            <p>{username}-{char}{<br />}</p>
+          </Modal>}    
 
-        {(char=='Rogue')&&<Modal id="roguecard" size="mini" open={true}>
-          <p>User {username} Selected Rogue.{<br />}</p>
-          <p>User Balance is:{<br />}</p>
-          <p>{userdata.hivebalance}{<br />}</p>
-          <p>{userdata.hbdbalance}{<br />}</p>
-        </Modal>}   
+          {(char=='Rogue')&&<Modal id="roguecard" size="mini" open={true}>
+            <p>User {username} Selected Rogue.{<br />}</p>
+            <p>User Balance is:{<br />}</p>
+            <p>{userdata.hivebalance}{<br />}</p>
+            <p>{userdata.hbdbalance}{<br />}</p>
+          </Modal>}   
 
-        {(char=='Warrior')&&<Modal id="warriorcard" size="mini" open={true}>
-          <p>User {username} Selected Warrior.{<br />}</p>
-          <p>User Balance is:{<br />}</p>
-          <p>{userdata.hivebalance}{<br />}</p>
-          <p>{userdata.hbdbalance}{<br />}</p>
-        </Modal>}   
+          {(char=='Warrior')&&<Modal id="warriorcard" size="mini" open={true}>
+            <p>User {username} Selected Warrior.{<br />}</p>
+            <p>User Balance is:{<br />}</p>
+            <p>{userdata.hivebalance}{<br />}</p>
+            <p>{userdata.hbdbalance}{<br />}</p>
+          </Modal>}   
 
-        {(char=='Priest')&&<Modal id="priestcard" size="mini" open={true}>
-          <p>User {username} Selected Priest.{<br />}</p>
-          <p>User Balance is:{<br />}</p>
-          <p>{userdata.hivebalance}{<br />}</p>
-          <p>{userdata.hbdbalance}{<br />}</p>
-        </Modal>}   
+          {(char=='Priest')&&<Modal id="priestcard" size="mini" open={true}>
+            <p>User {username} Selected Priest.{<br />}</p>
+            <p>User Balance is:{<br />}</p>
+            <p>{userdata.hivebalance}{<br />}</p>
+            <p>{userdata.hbdbalance}{<br />}</p>
+          </Modal>}   
 
+        </div>
       </div>
 
       )
