@@ -17,7 +17,8 @@ class App extends Component {
         char:'',
         userdata:{
           hivebalance:'',
-          hbdbalance:''
+          hbdbalance:'',
+          profilepicture:''
         }
           
       };
@@ -45,23 +46,50 @@ class App extends Component {
           hive.api.getAccountsAsync([this.state.username]).then(r => {
             console.log(r);
 
+            // While trying to get user profile picture, prevent "shit happens" if JSON turns empty...
+            try {
+              var json = r[0].json_metadata;
+              var err=0;                 
+              console.log(JSON.parse(json));
+            } catch (e) {
+              if (e instanceof SyntaxError) {
+                  err=1;
+              } else {
+                }
+            }
+
+            //console.log(JSON.parse(r[0].json_metadata).profile.profile_image);
             // if user is not a valid Hive User - alert user and turn to login screen -
             if(r.length==0){
               alert("The username "+this.state.username+" is not a Hive User.(don't use @ at the beginning");
               this.setState({
                 exists:false,
-                username:''
+                username:'',
+                
               })
 
             // if user is a valid Hive user, get user information and update it.
             }else{
-              this.setState({
-                userdata:{
-                  hivebalance:r[0].balance,
-                  hbdbalance:r[0].sbd_balance
-                }
-              })
-              console.log(this.state.userdata.hivebalance,this.state.userdata.hbdbalance);
+              // if the JSON is OK, update user data with current profile picture
+              if(err==0){
+                this.setState({
+                  userdata:{
+                    hivebalance:r[0].balance,
+                    hbdbalance:r[0].sbd_balance,
+                    profilepicture:JSON.parse(r[0].json_metadata).profile.profile_image
+                  }
+                })
+                // otherwise, update user data with an anonymous profile picture
+              }else{
+                this.setState({
+                  userdata:{
+                    hivebalance:r[0].balance,
+                    hbdbalance:r[0].sbd_balance,
+                    profilepicture:"https://cdn0.iconfinder.com/data/icons/user-pictures/100/unknown_1-2-512.png"
+                  }
+                })
+              }
+              console.log(this.state.userdata.hivebalance,this.state.userdata.hbdbalance,this.state.userdata.profilepicture);
             }
           });
         }       
@@ -96,7 +124,7 @@ class App extends Component {
         console.log("priest selected");
         this.setState({ 
         charselected: true,
-        char:'Priest'
+        char:'Cleric'
          });
       }
   
@@ -131,11 +159,28 @@ class App extends Component {
           </Modal>}
             
           {exists&&!charselected&&<Modal id="charselect" size="large" open={true}>
-            <Button id="roguebutton" onClick={this.handleRogueSelect}>Select Rogue
-            
+            <Button id="roguebutton" onClick={this.handleRogueSelect}>
+              <p id="RogueDef">Click to Select Rogue{<br />}
+                Attack  : Sum of 3 dices + 1{<br />}
+                Defence : Sum of 2 dices - 1{<br />}
+                HP      : 27
+              </p>
             </Button>
-            <Button id="warriorbutton" onClick={this.handleWarriorSelect}>Select Warrior</Button>
-            <Button id="priestbutton" onClick={this.handlePriestSelect}>Select Priest</Button>   
+            <Button id="warriorbutton" onClick={this.handleWarriorSelect}>
+              <p id="WarriorDef">Click to Select Warrior{<br />}
+                Attack  : Sum of 3 dices{<br />}
+                Defence : Sum of 2 dices{<br />}
+                HP      : 27
+              </p>
+            </Button>
+            <Button id="priestbutton" onClick={this.handlePriestSelect}>
+              <p id="PriestDef">Click to Select Cleric{<br />}
+                Attack  : Sum of 3 dices -1{<br />}
+                Defence : Sum of 2 dices{<br />}
+                HP      : 30
+              </p>
+            
+            </Button>   
           </Modal>}  
 
           {(charselected)&&<Modal id="online" size="mini" open={true}>
@@ -144,24 +189,46 @@ class App extends Component {
           </Modal>}    
 
           {(char=='Rogue')&&<Modal id="roguecard" size="mini" open={true}>
-            <p>User {username} Selected Rogue.{<br />}</p>
-            <p>User Balance is:{<br />}</p>
-            <p>{userdata.hivebalance}{<br />}</p>
-            <p>{userdata.hbdbalance}{<br />}</p>
+            <img id="userpicture" src={userdata.profilepicture}height="42" width="42"></img>
+            <p id="cardheader">{username} - {char}{<br />}</p>
+            <p id="cardtext">
+                Attack  : Sum of 3 dices + 1{<br />}
+                Defence : Sum of 2 dices - 1{<br />}
+                HP      : 27{<br />}{<br />}
+              {userdata.hivebalance}{<br />}
+              {userdata.hbdbalance}{<br />}
+            </p>
+            <Button id="pvpbutton" onClick={this.handlePvP}>PvP</Button>
+            <Button id="serverbossbutton" onClick={this.handleServerBoss}>Server Boss</Button>
+            
           </Modal>}   
 
           {(char=='Warrior')&&<Modal id="warriorcard" size="mini" open={true}>
-            <p>User {username} Selected Warrior.{<br />}</p>
-            <p>User Balance is:{<br />}</p>
-            <p>{userdata.hivebalance}{<br />}</p>
-            <p>{userdata.hbdbalance}{<br />}</p>
+            <img id="userpicture" src={userdata.profilepicture}height="42" width="42"></img>
+            <p id="cardheader">{username} - {char}{<br />}</p>
+            <p id="cardtext">
+                Attack  : Sum of 3 dices{<br />}
+                Defence : Sum of 2 dices{<br />}
+                HP      : 27{<br />}{<br />}
+              {userdata.hivebalance}{<br />}
+              {userdata.hbdbalance}{<br />}
+            </p>
+            <Button id="pvpbutton" onClick={this.handlePvP}>PvP</Button>
+            <Button id="serverbossbutton" onClick={this.handleServerBoss}>Server Boss</Button>
           </Modal>}   
 
-          {(char=='Priest')&&<Modal id="priestcard" size="mini" open={true}>
-            <p>User {username} Selected Priest.{<br />}</p>
-            <p>User Balance is:{<br />}</p>
-            <p>{userdata.hivebalance}{<br />}</p>
-            <p>{userdata.hbdbalance}{<br />}</p>
+          {(char=='Cleric')&&<Modal id="priestcard" size="mini" open={true}>
+            <img id="userpicture" src={userdata.profilepicture}height="42" width="42"></img>
+            <p id="cardheader">{username} - {char}{<br />}</p>
+            <p id="cardtext">
+                Attack  : Sum of 3 dices -1{<br />}
+                Defence : Sum of 2 dices{<br />}
+                HP      : 30{<br />}{<br />}
+              {userdata.hivebalance}{<br />}
+              {userdata.hbdbalance}{<br />}
+            </p>
+            <Button id="pvpbutton" onClick={this.handlePvP}>PvP</Button>
+            <Button id="serverbossbutton" onClick={this.handleServerBoss}>Server Boss</Button>
           </Modal>}   
 
         </div>

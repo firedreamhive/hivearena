@@ -48,7 +48,7 @@
 
 #modalBut{
   position: fixed; 
-  top: 20%;
+  top: 21%;
   left:44.5%;
   border-radius: 10px;
   font-size: 20px;
@@ -70,8 +70,8 @@
 
 #roguebutton{
   position: fixed;
-  top: 10%;
-  left: 3%;
+  top: 15%;
+  left: 22%;
   background-color: black;
   color: yellow;
   background-image: url("Globals/rogue.png");
@@ -80,7 +80,120 @@
   height: 40%;
 }
 
+#RogueDef{
+  position: fixed;
+  top:55%;
+  
+}
+#roguecard{
+  position: fixed;
+  top: 25%;
+  left: 42%;
+  background-color: black;
+  color: yellow;
+  background-image: url("Globals/rogue.png");
+  background-size: 100% 100%;
+  width :16%;
+  height: 40%;
+}
+#warriorcard{
+  position: fixed;
+  top: 25%;
+  left: 42%;
+  background-color: black;
+  color: yellow;
+  background-image: url("Globals/warrior.png");
+  background-size: 100% 100%;
+  width :16%;
+  height: 40%;
+}
 
+#priestcard{
+  position: fixed;
+  top: 25%;
+  left: 42%;
+  background-color: black;
+  color: yellow;
+  background-image: url("Globals/cleric.png");
+  background-size: 100% 100%;
+  width :16%;
+  height: 40%;
+}
+
+#userpicture{
+  position: relative;
+  top: -50px;
+}
+#cardheader{
+  position: relative;
+  top: -100px;
+  left:25%;
+}
+#cardtext{
+  position: relative;
+  top: 160px;
+}
+#pvpbutton{
+  position: relative; 
+  top: 150px;
+  left:0px;
+  width: 150px;
+  background-color: darkslategrey;
+  color:yellow;
+  border-radius: 10px;
+  font-size: 15px;
+  width: 100px;
+
+}
+
+#serverbossbutton{
+  position: relative; 
+  top: 150px;
+  left:10px;
+  width: 150px;
+  background-color: darkslategrey;
+  color:yellow;
+  border-radius: 10px;
+  font-size: 15px;
+  width: 100px;
+
+}
+
+#warriorbutton{
+  position: fixed;
+  top: 15%;
+  left: 42%;
+  background-color: black;
+  color: yellow;
+  background-image: url("Globals/warrior.png");
+  background-size: 100% 100%;
+  width :16%;
+  height: 40%;
+}
+
+#WarriorDef{
+  position: fixed;
+  top:55%;
+  
+}
+
+#priestbutton{
+  position: fixed;
+  top: 15%;
+  left: 62%;
+  background-color: black;
+  color: yellow;
+  background-image: url("Globals/cleric.png");
+  background-size: 100% 100%;
+  width :16%;
+  height: 40%;
+}
+
+#PriestDef{
+  position: fixed;
+  top:55%;
+  
+}
 
 #roguecard{
 
